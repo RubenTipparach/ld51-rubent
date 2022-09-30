@@ -1,0 +1,19 @@
+Library/
+Temp/
+.vs/
+
+*.csproj
+*.sln
+
+!*.dll
+!*.pdb
+!*.obj
+obj/
+Assets/ProBuilder Data/ProBuilderPreferences.asset
+Logs/
+testbuild/
+.vsconfig
+*.blend1
+.VSCodeCounter/
+source_assets/textures_source
+UserSettings/Layouts/default-2021.dwlt
