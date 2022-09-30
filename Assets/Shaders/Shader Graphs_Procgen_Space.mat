@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_Procgen_Space
+  m_Shader: {fileID: -6465566751694194690, guid: 7767a0dd6bd84a847b1b40b7491eb3eb,
+    type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _LargeDetail: 2
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ShimmerNoiseScale: 5
+    - _ShimmerPower: 2
+    - _ShimmerSpeed: 0.01
+    - _SmallDetail: 5
+    - _SmallDetal_power: 4.31
+    - _StarDensity: 1000
+    - _StarTextureSize: 50
+    m_Colors:
+    - _Color_1: {r: 0.3727179, g: 0.22828409, b: 0.509434, a: 0}
+    - _Color_2: {r: 0.07876469, g: 0.10117249, b: 0.2830189, a: 0}
+    - _Remap_in: {r: 0.68, g: 2.24, b: 0, a: 0}
+    - _Remap_out: {r: 0, g: 1.84, b: 0, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &446566292224729057
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5
