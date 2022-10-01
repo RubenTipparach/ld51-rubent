@@ -52,6 +52,8 @@ public class OrbitShipCamera : MonoBehaviour
     public Vector3 localCamPosition;
     public Quaternion localCamRotation;
 
+    float timeDeltaCustom = 0;
+
     protected void Awake()
     {
         tiltAngle = (tiltMin + tiltMax) / 2;
@@ -133,6 +135,9 @@ public class OrbitShipCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+
+        timeDeltaCustom = Time.unscaledDeltaTime;
+
         if (cameraTransform == null || target == null) return;
 
         // TODO: add a thing to the input system.

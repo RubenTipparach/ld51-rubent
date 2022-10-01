@@ -61,11 +61,11 @@ Game Design
                 - can only be fired once per round.
             - missiles - damages hull and weapons, can track, but are limited, and dont avoid collision
                 - launched in barages dpending on ship size
-            - torpedos - fires in a straight line, does massive damage to hull, can be obstructed
+            - torpedos [optional] - fires in a straight line, does massive damage to hull, can be obstructed
                 - only found on large ships, and can only carry 1 but nuke a large area.
                 - can destroy space debris?
         - subsystems
-            - shields, recharges to take 1 missile damage or diruptor damage
+            - shields [optional] - recharges to take 1 missile damage or diruptor damage
                 - torpedos ignore shields
             - armor, protects all subsystems, takes 1/4 damage of all attack types, disruptors don't affect it.
     - Cover/debris

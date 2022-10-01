@@ -38,9 +38,9 @@ Material:
     - _LargeDetail: 1.16
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ShimmerNoiseScale: 5
+    - _ShimmerNoiseScale: 10
     - _ShimmerPower: 2
-    - _ShimmerSpeed: 0.12
+    - _ShimmerSpeed: 0.01
     - _SmallDetail: 1.06
     - _SmallDetal_power: 4.31
     - _StarDensity: 1000
@@ -48,7 +48,7 @@ Material:
     m_Colors:
     - _Color_1: {r: 0.32708418, g: 0.22895159, b: 0.46226418, a: 0}
     - _Color_2: {r: 0.28235295, g: 0.07843136, b: 0.2248599, a: 0}
-    - _Remap_in: {r: 1.14, g: 1.43, b: 0, a: 0}
+    - _Remap_in: {r: 1.01, g: 1.43, b: 0, a: 0}
     - _Remap_out: {r: 1.17, g: 2.22, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &446566292224729057
