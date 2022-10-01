@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static UnityEngine.GraphicsBuffer;
@@ -26,6 +27,11 @@ public class GameManager : MonoBehaviour
 
     public WeaponsCommandController weaponsCommandController;
 
+    public Timing timer;
+
+    bool simulationRunning = false;
+
+    Ship[] allShips;
 
     private void Awake()
     {
@@ -38,26 +44,50 @@ public class GameManager : MonoBehaviour
     {
         orbitShipCamera.SetupCamera(orbitShipCamera.target, orbitShipCamera.mainCamera.transform);
 
+        
+        //Time.timeScale = 0;
+
+    }
+
+    IEnumerator lateStart()
+    {
+        yield return new WaitForEndOfFrame();
     }
 
     // Update is called once per frame
     void Update()
     {
         gameInput.UpdateInput();
+
+        if (simulationRunning)
+        {
+
+            foreach (var s in allShips)
+            {
+                s.UpdateShipPositionAndRotation(timer.GetProgressClamped);
+            }
+
+            if (timer.GetProgressClamped == 1f)
+            {
+                simulationRunning = false;
+            }
+        }
+
+        bool uiRaycastBlock = EventSystem.current.IsPointerOverGameObject();
+
         //Debug.Log(gameInput.MouseDelta);
-        bool selectedShipClick = false;
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !navController.navModeActive)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 10000))
             {
                 if (hit.rigidbody != null && hit.rigidbody.GetComponent<Ship>() != null)
                 {
-                    
+
                     var ship = hit.rigidbody.GetComponent<Ship>();
 
                     Debug.Log(ship.shipName + " ship selected");
-
+                    //var f = Time.deltaTime;
                     //targetController.transform.position = ship.transform.position;
                     targetController.followObj = ship.transform;
 
@@ -71,7 +101,7 @@ public class GameManager : MonoBehaviour
                     //{
                     //    navController.ActivateController(false);
                     //}
-                    if(selectedShip.isPlayer)
+                    if (selectedShip.isPlayer && simulationRunning == false)
                     {
                         navController.shipSelected = ship;
                     }
@@ -87,12 +117,32 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        bool uiRaycastBlock = EventSystem.current.IsPointerOverGameObject();
 
-        
-        if (navController.navModeActive)
+        bool selectedShipClick = false;
+
+        if (Input.GetMouseButton(0) && navController.navModeActive)
         {
-            if(Input.GetMouseButtonDown(0))
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, 10000))
+            {
+                if (hit.rigidbody != null && hit.rigidbody.GetComponent<Ship>() != null)
+                {
+                    var target = hit.rigidbody.GetComponent<Ship>();
+                    if (selectedShip.isPlayer && simulationRunning == false && target != selectedShip)
+                    {
+                        var orientation = Quaternion.LookRotation((hit.transform.position -
+                            navController.shipPositionDestination.transform.position).normalized);
+
+                        navController.UpdateOrientationPosition(orientation);
+                        selectedShipClick = true;
+                    }
+                }
+            }
+        }
+
+        if (navController.navModeActive && !selectedShipClick)
+        {
+            if (Input.GetMouseButtonDown(0))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit, 10000))
@@ -112,7 +162,7 @@ public class GameManager : MonoBehaviour
                     navController.shipSelected.transform.position.y;
             }
 
-            if (!uiRaycastBlock 
+            if (!uiRaycastBlock
                 && !navController.elevationWidget.interacting
                 && Input.GetMouseButton(0))
             {
@@ -131,9 +181,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    internal void EndTurn()
+    public void EndTurn()
     {
-        throw new NotImplementedException();
+        UpdateEnemyLogic();
+        simulationRunning = true;
+        timer.StartTimerAt(0);
+
+        allShips = FindObjectsOfType<Ship>();
+        foreach(var s in allShips)
+        {
+            s.EndTurn();
+        }
+    }
+
+
+    public void UpdateEnemyLogic()
+    {
+        var enemyShips = FindObjectsOfType<Ship>().Where(p => !p.isPlayer);
+
+        foreach(var es in enemyShips)
+        {
+            if(!es.maneuverSelected.initialDestSet)
+            {
+                es.maneuverSelected.Initialize(es);
+            }
+
+            // else randomly rotate (to face strongest player or weak player by prob.)
+            // and move to location close to the player.
+            // fire weapons based on probability for each 10 rounds per turn.
+        }
     }
 
     public static GameInput GameInput

@@ -312,7 +312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipName: 
   maxRotationArc: 90
-  maxMovementDistance: 20
+  maxMovementDistance: 40
   confirmedManuevers: 0
   fireCommands: []
   maneuverSelected:
@@ -382,7 +382,7 @@ LineRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7580069748478517735}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -487,6 +487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ship: {fileID: 5052924795965868945}
   lineRenderer: {fileID: 7223745177531230489}
+  destination: {x: 0, y: 0, z: 0}
 --- !u!1001 &1812287834938437393
 PrefabInstance:
   m_ObjectHideFlags: 0

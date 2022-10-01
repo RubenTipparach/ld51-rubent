@@ -82,6 +82,7 @@ public class UIController : MonoBehaviour
     public void EndTurn()
     {
         GameManager.Instance.EndTurn();
+        planningBar.SetActive(false);
     }
 
     public void HideEverything()

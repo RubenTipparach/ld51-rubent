@@ -7,6 +7,7 @@ public class ElevationWidget : MonoBehaviour
 
     public NavigationController navController;
 
+    public float sensitivity = 4;
     // Use this for initialization
     void Start()
     {
@@ -20,7 +21,7 @@ public class ElevationWidget : MonoBehaviour
         {
             var yOffset = GameManager.GameInput.MouseDelta.y;
 
-            navController.offsetElevation += yOffset * Time.deltaTime;
+            navController.offsetElevation += yOffset * Time.unscaledDeltaTime * sensitivity;
 
             var position = new Vector3(navController.shipPositionDestination.transform.position.x,
                 navController.shipSelected.transform.position.y,

@@ -16,6 +16,6 @@ public class ManueverViz : MonoBehaviour
     {
         lineRenderer.SetPosition(0, ship.transform.position);
         lineRenderer.SetPosition(1, transform.position);
-
+        transform.rotation = ship.maneuverSelected.targetOrientation;
     }
 }

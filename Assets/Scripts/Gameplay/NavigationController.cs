@@ -112,6 +112,8 @@ public class NavigationController : MonoBehaviour
             shipSelected.moveDestViz.SetActive(false);
 
             shipPositionDestination.transform.rotation = shipSelected.maneuverSelected.targetOrientation;
+            //shipPositionDestination.transform.position = shipSelected.maneuverSelected.destinationLocalOffset + shipSelected.transform.position;
+            UpdateDestinationPosition(shipSelected.maneuverSelected.destinationLocalOffset + shipSelected.transform.position);
             offsetElevation = shipSelected.maneuverSelected.offsetElevationTarget;
         }
     }

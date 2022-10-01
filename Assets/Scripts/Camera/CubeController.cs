@@ -61,14 +61,14 @@ public class CubeController : MonoBehaviour
 
             var camDirection = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1));
             var direction = Quaternion.LookRotation(camDirection) * directionMove;
-            transform.Translate(direction * Time.deltaTime * internalSpeed, Space.World);
+            transform.Translate(direction * Time.unscaledDeltaTime * internalSpeed, Space.World);
         }
         else
         {
             var snapThresh = .1f;
             if(Vector3.Distance(transform.position, followObj.position) > snapThresh)
             {
-                transform.position = Vector3.Lerp(transform.position, followObj.position, lerpSpeed * Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position, followObj.position, lerpSpeed * Time.unscaledDeltaTime);
             }else
             {
                 transform.position = followObj.position; 

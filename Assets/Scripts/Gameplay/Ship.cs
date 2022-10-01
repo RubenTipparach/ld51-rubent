@@ -27,6 +27,8 @@ public class Ship : MonoBehaviour
     Vector3 origin;
     Vector3 destination;
 
+    Quaternion startRotation;
+
     // Use this for initialization
     void Start()
     {
@@ -56,13 +58,36 @@ public class Ship : MonoBehaviour
     public void ConfirmMove(Vector3 dest, Quaternion ort, float offset)
     {
         maneuverSelected.ConfirmMove(dest, ort, offset);
-        
+
         origin = transform.position;
         destination = origin + dest;
 
         moveDestViz.transform.position = origin + dest;
         moveDestViz.transform.rotation = ort;
+
+        startRotation = transform.rotation;
+
         moveDestViz.SetActive(true);
+    }
+
+    public void EndTurn()
+    {
+
+        if (!maneuverSelected.initialDestSet)
+        {
+            maneuverSelected.Initialize(this);
+        }
+
+        startRotation = transform.rotation;
+        origin = transform.position;
+        destination = origin + maneuverSelected.destinationLocalOffset;
+
+    }
+
+    public void UpdateShipPositionAndRotation(float percent)
+    {
+        transform.position = Vector3.Lerp(origin, destination, percent);
+        transform.rotation = Quaternion.Lerp(startRotation, maneuverSelected.targetOrientation, percent);
     }
 }
 

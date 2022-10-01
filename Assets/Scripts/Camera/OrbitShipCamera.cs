@@ -162,7 +162,7 @@ public class OrbitShipCamera : MonoBehaviour
             if (cameraTransform.rotation != rotation)
             {
                 cameraTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, rotation,
-                    Time.deltaTime * rotationSpeed);
+                    timeDeltaCustom * rotationSpeed);
             }
 
             UpdateCamera(scroll);
@@ -178,7 +178,7 @@ public class OrbitShipCamera : MonoBehaviour
             //if (cameraTransform.rotation != rotation)
             //{
             cameraTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, rotation,
-                Time.deltaTime * rotationSpeed);
+                timeDeltaCustom * rotationSpeed);
             //}
 
             UpdateCamera(scroll);
@@ -192,13 +192,13 @@ public class OrbitShipCamera : MonoBehaviour
 
         if (scroll != 0)
         {
-            scrollDistance -= scroll * Time.deltaTime * scrollSensitivity;
+            scrollDistance -= scroll * Time.unscaledDeltaTime * scrollSensitivity;
             scrollDistance = Mathf.Clamp(scrollDistance, distanceMin, distanceMax);
         }
 
         if (distance != scrollDistance)
         {
-            distance = Mathf.SmoothDamp(distance, scrollDistance, ref velocity, Time.deltaTime * scrollSmoothing);
+            distance = Mathf.SmoothDamp(distance, scrollDistance, ref velocity, Time.unscaledDeltaTime * scrollSmoothing);
         }
 
         cameraTransform.position = CalculateCameraPosition();
