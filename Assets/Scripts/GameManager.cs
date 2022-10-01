@@ -33,6 +33,10 @@ public class GameManager : MonoBehaviour
 
     Ship[] allShips;
 
+    public HealthStats shipHealth;
+
+    public HealthStats reactorHealth;
+
     private void Awake()
     {
         gameManager = this;
