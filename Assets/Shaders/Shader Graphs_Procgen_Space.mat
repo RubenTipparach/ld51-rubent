@@ -35,21 +35,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _LargeDetail: 2
+    - _LargeDetail: 3.26
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ShimmerNoiseScale: 5
     - _ShimmerPower: 2
-    - _ShimmerSpeed: 0.01
-    - _SmallDetail: 5
+    - _ShimmerSpeed: 0.12
+    - _SmallDetail: 1.06
     - _SmallDetal_power: 4.31
     - _StarDensity: 1000
     - _StarTextureSize: 50
     m_Colors:
-    - _Color_1: {r: 0.3727179, g: 0.22828409, b: 0.509434, a: 0}
-    - _Color_2: {r: 0.07876469, g: 0.10117249, b: 0.2830189, a: 0}
-    - _Remap_in: {r: 0.68, g: 2.24, b: 0, a: 0}
-    - _Remap_out: {r: 0, g: 1.84, b: 0, a: 0}
+    - _Color_1: {r: 0.32708418, g: 0.22895159, b: 0.46226418, a: 0}
+    - _Color_2: {r: 0.28235295, g: 0.07843136, b: 0.2248599, a: 0}
+    - _Remap_in: {r: 0.69, g: 1.31, b: 0, a: 0}
+    - _Remap_out: {r: 1.17, g: 2.22, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &446566292224729057
 MonoBehaviour:
