@@ -21,8 +21,53 @@ https://github.com/kobitoko/Game-Jam-Tools-Resources
 Game Design Ideas:
 
 Card game with each turn is 10 seconds?
+
 Space game where each interval is 10 seconds
     - plan battles inbetween each turn, fast forward enabled.
     - ships have different hull facing
     - ships also have shields
-    
+
+Card game about collecting spaceships...
+... or weapons on board a ship
+    - how do weapons fire? 10 seconds will be an interval for all power to recharge?
+
+
+
+Game name: SCAVERS
+
+Game Design
+    - Camera: r/f up and down
+        - Free movement areound a pivot
+        - lock on a ship
+    - Ship movement
+        - yaw, pitch roll
+        - translational movement only.
+    - 10 second moanuver intervals
+        - show ship time slices.
+        - each manuever allows for limited travel distance
+        - each manuever allows for limited rotation of ship.
+        - each second time slice will aloow a player to plan their weapons firing.
+    - Progression: aim for 4-5 levels
+        - each level the fleet is persistent
+        - TODO: save fleet data in user prefs for laziness
+        - allow user to reset progress
+        - replaying a mission allows you to use your current fleet progress
+        - disabling a ship allows you to salvage it for future missions.
+    - ships have hull stuff 
+        - weapon types:
+            - disruptors - damages weapon systems only, can be blocked by obstacles
+                - can be fired 3 times
+            - lasers - same as missiles 
+                - can only be fired once per round.
+            - missiles - damages hull and weapons, can track, but are limited, and dont avoid collision
+                - launched in barages dpending on ship size
+            - torpedos - fires in a straight line, does massive damage to hull, can be obstructed
+                - only found on large ships, and can only carry 1 but nuke a large area.
+                - can destroy space debris?
+        - subsystems
+            - shields, recharges to take 1 missile damage or diruptor damage
+                - torpedos ignore shields
+            - armor, protects all subsystems, takes 1/4 damage of all attack types, disruptors don't affect it.
+    - Cover/debris
+        - Asteroids
+        - station and large freighter derlicts
