@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-765818607821490909
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -7,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Procgen_Space
-  m_Shader: {fileID: -6465566751694194690, guid: 7767a0dd6bd84a847b1b40b7491eb3eb,
+  m_Name: ShipMovementShader
+  m_Shader: {fileID: -6465566751694194690, guid: 15b661caf28ea104d8417ad1c6f276e0,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -35,32 +48,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _LargeDetail: 1.16
+    - _Float: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ShimmerNoiseScale: 5
-    - _ShimmerPower: 2
-    - _ShimmerSpeed: 0.12
-    - _SmallDetail: 1.06
-    - _SmallDetal_power: 4.31
-    - _StarDensity: 1000
-    - _StarTextureSize: 50
+    - _emission_power: 0.1
+    - _fresnel_power: 0.54
+    - _highlight_on: 0
+    - _tiling_dither: 1.46
     m_Colors:
-    - _Color_1: {r: 0.32708418, g: 0.22895159, b: 0.46226418, a: 0}
-    - _Color_2: {r: 0.28235295, g: 0.07843136, b: 0.2248599, a: 0}
-    - _Remap_in: {r: 1.14, g: 1.43, b: 0, a: 0}
-    - _Remap_out: {r: 1.17, g: 2.22, b: 0, a: 0}
+    - _Color: {r: 0, g: 0.5048547, b: 1, a: 0.7882353}
+    - _Highlight: {r: 1.6392157, g: 0.8862745, b: 0, a: 0.572549}
+    - _emission: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &446566292224729057
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 5
