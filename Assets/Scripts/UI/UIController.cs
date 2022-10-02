@@ -24,18 +24,68 @@ public class UIController : MonoBehaviour
     public GameObject torpedo;
     public GameObject cancleWeps;
 
+    public List<ShipHealthSlider> shipHealthSliders;
 
+    public ShipHealthSlider templateHealthSlider;
+
+    public float sliderYOffset = 20f;
     // Start is called before the first frame update
     void Start()
     {
         //SelectShip(false);
-        planningBar.SetActive(false);  
+        planningBar.SetActive(false);
+
+        foreach (var ship in GameManager.Instance.allShips)
+        {
+            var hSlider = Instantiate(templateHealthSlider, transform);
+            ship.shipHealthSlider = hSlider;
+            ship.shipHealthSlider.Initialize(ship.isPlayer);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        foreach(var ship in GameManager.Instance.allShips)
+        {
+            var isVisible = IsVisible(Camera.main, ship.gameObject);
+            if (isVisible)
+            {
+                ship.shipHealthSlider.gameObject.SetActive(true);
+
+                RectTransform CanvasRect = GetComponent<RectTransform>();
+
+                //then you calculate the position of the UI element
+                //0,0 for the canvas is at the center of the screen, whereas WorldToViewPortPoint treats the lower left corner as 0,0. Because of this, you need to subtract the height / width of the canvas * 0.5 to get the correct position.
+
+                Vector2 viewportPosition = Camera.main.WorldToViewportPoint(ship.transform.position);
+                Vector2 screenPosition = new Vector2(
+                ((viewportPosition.x * CanvasRect.sizeDelta.x) - (CanvasRect.sizeDelta.x * 0.5f)),
+                ((viewportPosition.y * CanvasRect.sizeDelta.y) - (CanvasRect.sizeDelta.y * 0.5f)))
+                     + new Vector2(0, sliderYOffset);
+
+                ((RectTransform)ship.shipHealthSlider.healthSlider.transform).anchoredPosition = screenPosition;
+            }
+            else
+            {
+                ship.shipHealthSlider.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private bool IsVisible(Camera c, GameObject target)
+    {
+        var planes = GeometryUtility.CalculateFrustumPlanes(c);
+        var point = target.transform.position;
+
+        foreach (var plane in planes)
+        {
+            if (plane.GetDistanceToPoint(point) < 0)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void SelectShip(bool isPlayer)
@@ -58,6 +108,7 @@ public class UIController : MonoBehaviour
             HideEverything();
         }
     }
+
     void BringBackMainMenu()
     {
         HideEverything();

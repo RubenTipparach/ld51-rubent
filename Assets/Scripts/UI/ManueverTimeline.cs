@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class ManueverTimeline : MonoBehaviour
 {
@@ -60,9 +61,22 @@ public class ManueverTimeline : MonoBehaviour
         }
     }
 
+    public void LoadNewMarkers()
+    {
+        ClearWeaponMarkers();
+        if (GameManager.Instance.selectedShip != null)
+        {
+            for (int i = 0; i < textNumbers.Length - 1; i++)
+            {
+                var firingCommands = GameManager.Instance.selectedShip.firingSolutiion.fireCommand;
+                textNumbers[i].weaponMarker.enabled = firingCommands[i].Count > 0;
+            }
+        }
+    }
+
     public void ClearWeaponMarkers()
     {
-        for (int i = 0; i < textNumbers.Length; i++)
+        for (int i = 0; i < textNumbers.Length - 1; i++)
         {
             textNumbers[i].weaponMarker.enabled = false;
         }

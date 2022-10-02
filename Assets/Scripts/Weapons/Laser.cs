@@ -13,6 +13,8 @@ public class Laser : Weapon
     public float reactorDamageRatio = .5f;
 
 
+    public float range = 50f;
+
     public override bool CanFireThisRound()
     {
         return !firedThisRound;
@@ -28,15 +30,17 @@ public class Laser : Weapon
         if (!firedThisRound)
         {
             var beam = Instantiate(beamTrailSpawn);
-            beam.FireBegin(() => DamagePlayer(target), transform, target.transform);
+            DamagePlayer(target);
+            beam.FireBegin(() => { Debug.Log("damage callback"); }, transform, target.transform, range);
         }
     }
 
     void DamagePlayer(Ship target)
     {
         float damageToHull = damage; // TODO: check if hit armor
-        target.shipHealth.TakeDamage(damageToHull);
-        target.reactorHealth.TakeDamage(damageToHull * reactorDamageRatio);
+        target.DealDamage(damageToHull, damageToHull * reactorDamageRatio);
+        // target.shipHealth.TakeDamage(damageToHull);
+        //target.reactorHealth.TakeDamage(damageToHull * reactorDamageRatio);
     }
 
     public override void StartNewRound()

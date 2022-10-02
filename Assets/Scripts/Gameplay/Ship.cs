@@ -37,6 +37,45 @@ public class Ship : MonoBehaviour
 
     public FiringSolutiion firingSolutiion;
 
+    public ShipHealthSlider shipHealthSlider;
+
+    public Explosion explosionImpact;
+    public Explosion shipDestroyed;
+
+    public void DealDamage(float hullDamage, float reactorDamage, Vector3? hullImpactPoint = null)
+    {
+        shipHealth.TakeDamage(hullDamage);
+
+        if(hullImpactPoint != null)
+        {
+            // blow up in that spot
+        }
+        else
+        {
+            Instantiate(explosionImpact, transform.position, Quaternion.identity);
+        }
+
+        //reactorHealth.TakeDamage(reactorDamage);
+
+        //healthSprite.
+        shipHealthSlider.healthSlider.value = shipHealth.Percent;
+
+        if(reactorHealth.IsDead)
+        {
+            //ship is disabled.
+        }
+
+        if(shipHealth.IsDead)
+        {
+            // ship explodes.
+            Instantiate(shipDestroyed, transform.position, Quaternion.identity);
+            GameManager.Instance.allShips.Remove(this); //fuck it, lets blow it up!
+            Destroy(shipHealthSlider.gameObject);
+            Destroy(gameObject);
+
+        }
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -44,8 +83,11 @@ public class Ship : MonoBehaviour
         {
             shipName = transform.name;
         }
+
         firingSolutiion = new FiringSolutiion();
         firingSolutiion.Initialize();
+        shipHealth.Init();
+        reactorHealth.Init();
     }
 
     // Update is called once per frame

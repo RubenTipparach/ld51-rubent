@@ -199,7 +199,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    beamTravelSpeed: 40000
+    beamTravelSpeed: 500
     beamOpacity:
       serializedVersion: 2
       m_Curve:
@@ -252,7 +252,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   line: {fileID: 7529727945789267535}
-  afterGlowTime: 0
+  afterGlowTime: 0.5
   gradient:
     serializedVersion: 2
     key0: {r: 0, g: 0.048745155, b: 1, a: 1}

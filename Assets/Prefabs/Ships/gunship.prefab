@@ -635,6 +635,7 @@ MonoBehaviour:
   damage: 10
   armorPiercing: 0.25
   reactorDamageRatio: 0.5
+  range: 50
 --- !u!1 &4808872841536904821
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,7 +787,6 @@ MonoBehaviour:
   maxRotationArc: 90
   maxMovementDistance: 40
   movementOrderedChange: 0
-  fireCommands: []
   maneuverSelected:
     destinationLocalOffset: {x: 0, y: 0, z: 0}
     targetOrientation: {x: 0, y: 0, z: 0, w: 0}
@@ -805,6 +805,11 @@ MonoBehaviour:
     overideCurrentHealth: -1
   weapons:
   - {fileID: 6528885849270348566}
+  shipHealthSlider: {fileID: 0}
+  explosionImpact: {fileID: 2925537147756545954, guid: 6a23ab0b7bd70a042bf0ab3eee5bb981,
+    type: 3}
+  shipDestroyed: {fileID: 7096603956656296648, guid: d124b75bba7db7b49a2d819b17ef98ca,
+    type: 3}
 --- !u!54 &5052924795965868958
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     bool simulationRunning = false;
 
-    Ship[] allShips;
+    public List<Ship> allShips;
 
     public ManueverTimeline manueverTimeline;
 
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     {
         gameManager = this;
         gameInput = new GameInput();
+        allShips = FindObjectsOfType<Ship>().ToList();
     }
 
     // Start is called before the first frame update
@@ -60,7 +61,15 @@ public class GameManager : MonoBehaviour
 
     private void StartOfTurn()
     {
-        uiController.SelectShip(selectedShip.isPlayer);
+        if (selectedShip != null)
+        {
+            uiController.SelectShip(selectedShip.isPlayer);
+
+            if (selectedShip.isPlayer)
+            {
+                manueverTimeline.LoadNewMarkers();
+            }
+        }
 
         foreach (var s in allShips)
         {
@@ -71,7 +80,7 @@ public class GameManager : MonoBehaviour
         manueverTimeline.SetHighlight(0);
         manueverTimeline.RunTimeline(false);
         //manueverTimeline.ClearWepMarkers(); // maybe keep this?
-        manueverTimeline.timesliceSelection.slider.value = 0;
+        manueverTimeline.timesliceSelection.slider.value = 0;        
     }
 
     // Update is called once per frame
@@ -104,6 +113,7 @@ public class GameManager : MonoBehaviour
                 if(weaponTimer.Completed())
                 {
                     weaponTimer.StartTimerAt(0);
+
                     foreach (var s in allShips)
                     {
                         s.CheckAndFireWeapons(highlightIndex);
@@ -135,6 +145,7 @@ public class GameManager : MonoBehaviour
                     if (selectedShip.isPlayer && simulationRunning == false)
                     {
                         navController.shipSelected = ship;
+                        manueverTimeline.LoadNewMarkers();
                     }
                     else
                     {
@@ -223,7 +234,6 @@ public class GameManager : MonoBehaviour
         timer.StartTimerAt(0);
         weaponTimer.StartTimerAt(0);
 
-        allShips = FindObjectsOfType<Ship>();
         foreach(var s in allShips)
         {
             s.EndTurn();
