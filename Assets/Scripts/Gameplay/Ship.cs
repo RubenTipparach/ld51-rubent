@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Mono.Cecil;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.UI.Image;
 
 public class Ship : MonoBehaviour
@@ -12,9 +14,7 @@ public class Ship : MonoBehaviour
 
     public float maxMovementDistance = 20f; // 2 km/s
 
-    public bool confirmedManuevers = false;
-
-    public List<FireCommand> fireCommands;
+    public bool movementOrderedChange = false;
 
     public Maneuver maneuverSelected;
 
@@ -35,6 +35,8 @@ public class Ship : MonoBehaviour
 
     public Weapon[] weapons;
 
+    public FiringSolutiion firingSolutiion;
+
     // Use this for initialization
     void Start()
     {
@@ -42,8 +44,8 @@ public class Ship : MonoBehaviour
         {
             shipName = transform.name;
         }
-
-        fireCommands = new List<FireCommand>();
+        firingSolutiion = new FiringSolutiion();
+        firingSolutiion.Initialize();
     }
 
     // Update is called once per frame
@@ -57,24 +59,46 @@ public class Ship : MonoBehaviour
 
     public void StartOfNewTurn()
     {
-        confirmedManuevers = false;
-        fireCommands.Clear();
+        destination = transform.position + maneuverSelected.destinationLocalOffset;
+
+        //decide if orientation facing enemy has to be updated.
+        if (!movementOrderedChange)
+        {
+            if (maneuverSelected.targetSelected != null)
+            {
+                maneuverSelected.targetOrientation = Quaternion.LookRotation((
+                    maneuverSelected.targetSelected.transform.position -
+                     destination).normalized);
+            }
+        }
+
+        if (isPlayer)
+        {
+            ShowMovementPlan();
+        }
+
+        //clear flags.
+        //firingSolutiion.Clear();
+        movementOrderedChange = false;
     }
 
-    public void ConfirmMove(Vector3 dest, Quaternion ort, float offset)
+    public void ConfirmMove(Vector3 dest, Quaternion ort, float offset, Ship target)
     {
-        maneuverSelected.ConfirmMove(dest, ort, offset);
+        // this is if the user didnt issue any changes the ship will stay oriented to target.
+        var orientation = ort;
+
+        maneuverSelected.ConfirmMove(dest, orientation, offset, target);
 
         origin = transform.position;
-
         startRotation = transform.rotation;
+        destination = transform.position + maneuverSelected.destinationLocalOffset;
+
         ShowMovementPlan();
     }
 
 
     public void ShowMovementPlan()
     {
-        destination = origin + maneuverSelected.destinationLocalOffset;
         moveDestViz.transform.position = destination;
         moveDestViz.transform.rotation = maneuverSelected.targetOrientation;
         moveDestViz.SetActive(true);
@@ -91,12 +115,33 @@ public class Ship : MonoBehaviour
         origin = transform.position;
         destination = origin + maneuverSelected.destinationLocalOffset;
 
+        //auto fire anything queued at the 0th second.
+        CheckAndFireWeapons(0);
     }
 
     public void UpdateShipPositionAndRotation(float percent)
     {
         transform.position = Vector3.Lerp(origin, destination, percent);
         transform.rotation = Quaternion.Lerp(startRotation, maneuverSelected.targetOrientation, percent);
+    }
+
+    public void QueueWeaponFire(int timeSecond,
+        bool remove = false,
+        int wepIndex = 0)
+    {
+
+        firingSolutiion.QueueWeaponFire(timeSecond,
+            weapons[wepIndex]);
+    }
+
+    public void ClearSecond(int timeSecond)
+    {
+        firingSolutiion.ClearSecond(timeSecond);
+    }
+
+    public void CheckAndFireWeapons(int timeSecond)
+    {
+        firingSolutiion.FireWeapons(timeSecond);
     }
 }
 
@@ -108,7 +153,7 @@ public class Maneuver
     public Quaternion targetOrientation;
     public float offsetElevationTarget = 0;
     public bool initialDestSet = false;
-
+    public Ship targetSelected;
     public void Initialize(Ship ship)
     {
         initialDestSet = true;
@@ -116,19 +161,75 @@ public class Maneuver
         destinationLocalOffset = ship.transform.forward * ship.maxMovementDistance / 4f;
     }
 
-    public void ConfirmMove(Vector3 dest, Quaternion ort, float offset)
+    public void ConfirmMove(Vector3 dest, Quaternion ort, float offset, Ship target)
     {
         targetOrientation = ort;
         destinationLocalOffset = dest;
         offsetElevationTarget = offset;
+        targetSelected = target;
+    }
+
+}
+
+public class FiringSolutiion
+{
+    public Dictionary<int, List<FireCommand>> fireCommand;
+    public Ship targetFiring;
+
+    public void Initialize()
+    {
+        fireCommand = new Dictionary<int, List<FireCommand>>();
+
+        // number 10 should not be able to fire.
+        for (int i = 0; i < 10; i++)
+        {
+            fireCommand.Add(i, new List<FireCommand>());
+        }
+    }
+
+    public void SetWeaponsToTarget(Ship target)
+    {
+        targetFiring = target;
+    }
+
+    public void FireWeapons(int timeSecond)
+    {
+        if (targetFiring == null) { return; }
+
+        foreach (var weps in fireCommand[timeSecond])
+        {
+            weps.weaponQueued.FireWeapon(targetFiring);
+        }
+    }
+
+    public void QueueWeaponFire(int timeSecond, Weapon weapon)
+    {
+        fireCommand[timeSecond].Add(new FireCommand(weapon));
+    }
+    public void ClearSecond(int timeSecond)
+    {
+        fireCommand[timeSecond].Clear();
+    }
+
+    public void Clear()
+    {
+        // clear all weapons queue.
+        for (int i = 0; i < 10; i++)
+        {
+            fireCommand[i].Clear();
+        }
     }
 }
 
 [Serializable]
 public class FireCommand
 {
-    public WeaponType weaponType;
-    int markStep = 0;
+    public FireCommand(Weapon weapon)
+    {
+        weaponQueued = weapon;
+    }
+
+    public Weapon weaponQueued;
 }
 
 public enum WeaponType

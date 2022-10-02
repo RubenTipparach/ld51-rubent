@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour, Weapon
+public class Laser : Weapon
 {
     public bool firedThisRound = false;
 
@@ -13,20 +13,23 @@ public class Laser : MonoBehaviour, Weapon
     public float reactorDamageRatio = .5f;
 
 
-    public bool CanFireThisRound()
+    public override bool CanFireThisRound()
     {
         return !firedThisRound;
     }
 
-    public void BeginFiringQueue()
+    public override void BeginFiringQueue()
     {
         firedThisRound = true;
     }
 
-    public void FireWeapon(Ship target)
+    public override void FireWeapon(Ship target)
     {
-        var beam = Instantiate(beamTrailSpawn);
-        beam.FireBegin(() => DamagePlayer(target), transform, target.transform);
+        if (!firedThisRound)
+        {
+            var beam = Instantiate(beamTrailSpawn);
+            beam.FireBegin(() => DamagePlayer(target), transform, target.transform);
+        }
     }
 
     void DamagePlayer(Ship target)
@@ -36,7 +39,7 @@ public class Laser : MonoBehaviour, Weapon
         target.reactorHealth.TakeDamage(damageToHull * reactorDamageRatio);
     }
 
-    public void StartNewRound()
+    public override void StartNewRound()
     {
         firedThisRound = false;
     }

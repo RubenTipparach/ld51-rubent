@@ -33,6 +33,11 @@ public class GameManager : MonoBehaviour
 
     Ship[] allShips;
 
+    public ManueverTimeline manueverTimeline;
+
+    public int highlightedTimeSecond = 0;
+
+    public Timing weaponTimer;
 
     private void Awake()
     {
@@ -44,15 +49,29 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         orbitShipCamera.SetupCamera(orbitShipCamera.target, orbitShipCamera.mainCamera.transform);
-
-        
+        manueverTimeline.SetHighlight(0);
         //Time.timeScale = 0;
-
     }
 
-    IEnumerator lateStart()
+    //IEnumerator lateStart()
+    //{
+    //    yield return new WaitForEndOfFrame();
+    //}
+
+    private void StartOfTurn()
     {
-        yield return new WaitForEndOfFrame();
+        uiController.SelectShip(selectedShip.isPlayer);
+
+        foreach (var s in allShips)
+        {
+            s.StartOfNewTurn();
+        }
+
+        manueverTimeline.timelineSlider.value = 0;
+        manueverTimeline.SetHighlight(0);
+        manueverTimeline.RunTimeline(false);
+        //manueverTimeline.ClearWepMarkers(); // maybe keep this?
+        manueverTimeline.timesliceSelection.slider.value = 0;
     }
 
     // Update is called once per frame
@@ -66,16 +85,28 @@ public class GameManager : MonoBehaviour
             foreach (var s in allShips)
             {
                 s.UpdateShipPositionAndRotation(timer.GetProgressClamped);
-            }
+            }            
 
             if (timer.GetProgressClamped == 1f)
             {
                 simulationRunning = false;
-                foreach (var s in allShips)
+                StartOfTurn();
+            } else
+            {
+                var highlightIndex = (int)Mathf.Floor(timer.GetProgressClamped * 10f);
+
+                // highlight stuff.
+                manueverTimeline.SetHighlight(highlightIndex);
+
+                manueverTimeline.timelineSlider.value =
+                    timer.GetProgressClamped;
+
+                if(weaponTimer.Completed())
                 {
-                    if (s.isPlayer)
+                    weaponTimer.StartTimerAt(0);
+                    foreach (var s in allShips)
                     {
-                        s.ShowMovementPlan();
+                        s.CheckAndFireWeapons(highlightIndex);
                     }
                 }
             }
@@ -100,15 +131,7 @@ public class GameManager : MonoBehaviour
                     targetController.followObj = ship.transform;
 
                     selectedShip = ship;
-                    // todo: display ui data.
-                    //if (selectedShip.isPlayer)
-                    //{
-                    //    navController.SelectShip(ship);
-                    //}
-                    //else
-                    //{
-                    //    navController.ActivateController(false);
-                    //}
+       
                     if (selectedShip.isPlayer && simulationRunning == false)
                     {
                         navController.shipSelected = ship;
@@ -120,7 +143,7 @@ public class GameManager : MonoBehaviour
                         //cancel weapons stuff.
                     }
 
-                    uiController.SelectShip(selectedShip.isPlayer);
+                    uiController.SelectShip(selectedShip.isPlayer && simulationRunning == false);
 
                 }
             }
@@ -128,6 +151,7 @@ public class GameManager : MonoBehaviour
 
         bool selectedShipClick = false;
 
+        // quick rotate code to target enemy ships and rotate towards them.
         if (Input.GetMouseButton(0) && navController.navModeActive)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -140,8 +164,11 @@ public class GameManager : MonoBehaviour
                     {
                         var orientation = Quaternion.LookRotation((hit.transform.position -
                             navController.shipPositionDestination.transform.position).normalized);
-
+                        navController.rotateToTarget = target;
                         navController.UpdateOrientationPosition(orientation);
+
+                        selectedShip.firingSolutiion.targetFiring = target;
+
                         selectedShipClick = true;
                     }
                 }
@@ -194,12 +221,15 @@ public class GameManager : MonoBehaviour
         UpdateEnemyLogic();
         simulationRunning = true;
         timer.StartTimerAt(0);
+        weaponTimer.StartTimerAt(0);
 
         allShips = FindObjectsOfType<Ship>();
         foreach(var s in allShips)
         {
             s.EndTurn();
         }
+
+        manueverTimeline.RunTimeline(true);
     }
 
 

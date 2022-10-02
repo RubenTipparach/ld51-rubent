@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class UIController : MonoBehaviour
     public GameObject nextBtn;
 
     public GameObject moveBtn;
-    public GameObject fireWeapon;
+    public Button fireWeapon;
     public GameObject endTurnBtn;
 
     public GameObject confirmNavBtn;
@@ -45,6 +46,7 @@ public class UIController : MonoBehaviour
 
     public void ActivateMove(bool active)
     {
+        GameManager.Instance.navController.shipSelected = GameManager.Instance.selectedShip;
         GameManager.Instance.navController.ActivateController(active);
         if(active)
         {
@@ -64,7 +66,7 @@ public class UIController : MonoBehaviour
         nextBtn.SetActive(true);
 
         moveBtn.SetActive(true);
-        fireWeapon.SetActive(true);
+        fireWeapon.gameObject.SetActive(true);
         endTurnBtn.SetActive(true);
     }
 
@@ -91,7 +93,7 @@ public class UIController : MonoBehaviour
         nextBtn.SetActive(false);
 
         moveBtn.SetActive(false);
-        fireWeapon.SetActive(false);
+        fireWeapon.gameObject.SetActive(false);
         endTurnBtn.SetActive(false);
 
         confirmNavBtn.SetActive(false);

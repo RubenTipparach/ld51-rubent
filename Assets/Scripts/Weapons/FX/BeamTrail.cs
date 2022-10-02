@@ -73,6 +73,7 @@ public class BeamTrail : MonoBehaviour
         beamDistanceTimer = new Timing();
         beamDistanceTimer.duration = Vector3.Distance(origin.position, destination.position) / beamAttributes.beamTravelSpeed + afterGlowTime;
         beamDistanceTimer.Init();
+        Debug.Log("time for beam" + beamDistanceTimer.duration);
 
         transform.position = origin.position;
         line.SetPosition(0, transform.position);

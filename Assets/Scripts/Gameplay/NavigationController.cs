@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class NavigationController : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class NavigationController : MonoBehaviour
     public Ship shipSelected;
 
     public ElevationWidget elevationWidget;
+
+    public Ship rotateToTarget;
 
     public void SetElevationOffset(float value)
     {
@@ -79,6 +82,9 @@ public class NavigationController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             UpdateOrientationPosition(Quaternion.LookRotation(heading.normalized));
+
+            // you don't have to shoot at them I guess...
+            rotateToTarget = null;
         }
     }
 
@@ -100,8 +106,10 @@ public class NavigationController : MonoBehaviour
         navModeActive = active;
         foreach (var m in intervalMarkers) { m.SetActive(active); }
 
-        if(active)
+        if (active)
         {
+            rotateToTarget = shipSelected.maneuverSelected.targetSelected;
+
             if (!shipSelected.maneuverSelected.initialDestSet)
             {
                 shipSelected.maneuverSelected.Initialize(shipSelected);
@@ -115,6 +123,10 @@ public class NavigationController : MonoBehaviour
             //shipPositionDestination.transform.position = shipSelected.maneuverSelected.destinationLocalOffset + shipSelected.transform.position;
             UpdateDestinationPosition(shipSelected.maneuverSelected.destinationLocalOffset + shipSelected.transform.position);
             offsetElevation = shipSelected.maneuverSelected.offsetElevationTarget;
+        }
+        else
+        {
+            rotateToTarget = null;
         }
     }
 
@@ -143,10 +155,17 @@ public class NavigationController : MonoBehaviour
 
     public void Confirm()
     {
+        var orientation = shipPositionDestination.transform.rotation;
 
+        //if (rotateToTarget != null)
+        //{
+        //    orientation = Quaternion.LookRotation((rotateToTarget.transform.position - shipPositionDestination.transform.position).normalized);
+        //}
+
+        shipSelected.movementOrderedChange = true;
         shipSelected.ConfirmMove(shipPositionDestination.transform.position - shipSelected.transform.position,
-            shipPositionDestination.transform.rotation, 
-            offsetElevation);
+            orientation,
+            offsetElevation, rotateToTarget);
 
         ActivateController(false);
     }

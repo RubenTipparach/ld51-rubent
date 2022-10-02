@@ -785,13 +785,14 @@ MonoBehaviour:
   shipName: 
   maxRotationArc: 90
   maxMovementDistance: 40
-  confirmedManuevers: 0
+  movementOrderedChange: 0
   fireCommands: []
   maneuverSelected:
     destinationLocalOffset: {x: 0, y: 0, z: 0}
     targetOrientation: {x: 0, y: 0, z: 0, w: 0}
     offsetElevationTarget: 0
     initialDestSet: 0
+    targetSelected: {fileID: 0}
   shipGhost: {fileID: 3583778524221344429, guid: a7c26e443445c964480654d773c32f68,
     type: 3}
   isPlayer: 0
@@ -802,6 +803,8 @@ MonoBehaviour:
   reactorHealth:
     startingHealth: 100
     overideCurrentHealth: -1
+  weapons:
+  - {fileID: 6528885849270348566}
 --- !u!54 &5052924795965868958
 Rigidbody:
   m_ObjectHideFlags: 0

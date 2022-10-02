@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Weapon
+public abstract class Weapon : MonoBehaviour
 {
-    void StartNewRound();
+    public abstract void StartNewRound();
 
-    void FireWeapon(Ship target);
+    public abstract void FireWeapon(Ship target);
 
-    bool CanFireThisRound();
+    public abstract bool CanFireThisRound();
 
-    void BeginFiringQueue();
+    public abstract void BeginFiringQueue();
 }
