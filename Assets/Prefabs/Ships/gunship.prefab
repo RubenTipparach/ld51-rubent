@@ -164,6 +164,38 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!1 &1321836346730469565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6707224646565043068}
+  m_Layer: 6
+  m_Name: Weapons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6707224646565043068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321836346730469565}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 199189258818838043}
+  m_Father: {fileID: 5052924795965868944}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1839738863116631835
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,6 +585,56 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -9085312850178033768, guid: b828a7c92bf94b747ae7024f9c6a78ee, type: 3}
+--- !u!1 &4471808862843194085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 199189258818838043}
+  - component: {fileID: 6528885849270348566}
+  m_Layer: 6
+  m_Name: Laser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &199189258818838043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4471808862843194085}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6707224646565043068}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6528885849270348566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4471808862843194085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98dcafcc4b4950c46a6b26f8c8a8d5c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firedThisRound: 0
+  beamTrailSpawn: {fileID: 7529727945789267533, guid: 59db4987513de0a45b55a14b6770d5c5,
+    type: 3}
+  damage: 10
+  armorPiercing: 0.25
+  reactorDamageRatio: 0.5
 --- !u!1 &4808872841536904821
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,6 +765,7 @@ Transform:
   - {fileID: 3992829154633738936}
   - {fileID: 1785499480354959366}
   - {fileID: 704690235}
+  - {fileID: 6707224646565043068}
   - {fileID: 3706079891708859258}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -713,6 +796,12 @@ MonoBehaviour:
     type: 3}
   isPlayer: 0
   moveDestViz: {fileID: 7580069748478517735}
+  shipHealth:
+    startingHealth: 100
+    overideCurrentHealth: -1
+  reactorHealth:
+    startingHealth: 100
+    overideCurrentHealth: -1
 --- !u!54 &5052924795965868958
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -948,7 +1037,7 @@ Transform:
   m_Children:
   - {fileID: 6531419632996961675}
   m_Father: {fileID: 5052924795965868944}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &7223745177531230489
 LineRenderer:

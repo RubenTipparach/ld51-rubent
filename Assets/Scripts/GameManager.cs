@@ -33,9 +33,6 @@ public class GameManager : MonoBehaviour
 
     Ship[] allShips;
 
-    public HealthStats shipHealth;
-
-    public HealthStats reactorHealth;
 
     private void Awake()
     {
@@ -74,6 +71,13 @@ public class GameManager : MonoBehaviour
             if (timer.GetProgressClamped == 1f)
             {
                 simulationRunning = false;
+                foreach (var s in allShips)
+                {
+                    if (s.isPlayer)
+                    {
+                        s.ShowMovementPlan();
+                    }
+                }
             }
         }
 

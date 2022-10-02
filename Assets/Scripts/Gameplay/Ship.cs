@@ -29,6 +29,12 @@ public class Ship : MonoBehaviour
 
     Quaternion startRotation;
 
+    public HealthStats shipHealth;
+
+    public HealthStats reactorHealth;
+
+    public Weapon[] weapons;
+
     // Use this for initialization
     void Start()
     {
@@ -60,16 +66,19 @@ public class Ship : MonoBehaviour
         maneuverSelected.ConfirmMove(dest, ort, offset);
 
         origin = transform.position;
-        destination = origin + dest;
-
-        moveDestViz.transform.position = origin + dest;
-        moveDestViz.transform.rotation = ort;
 
         startRotation = transform.rotation;
-
-        moveDestViz.SetActive(true);
+        ShowMovementPlan();
     }
 
+
+    public void ShowMovementPlan()
+    {
+        destination = origin + maneuverSelected.destinationLocalOffset;
+        moveDestViz.transform.position = destination;
+        moveDestViz.transform.rotation = maneuverSelected.targetOrientation;
+        moveDestViz.SetActive(true);
+    }
     public void EndTurn()
     {
 
