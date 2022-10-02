@@ -24,6 +24,9 @@ public class BeamTrail : MonoBehaviour
 
     float maxRange = 10;
     bool noHit = false;
+    Vector3 originPoint = Vector3.zero;
+    Vector3 destPoint = Vector3.zero;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,26 +41,27 @@ public class BeamTrail : MonoBehaviour
         {
             var distanceRatio = beamAttributes.beamDistanceCurve.Evaluate(beamDistanceTimer.GetProgressClamped);
 
-            Vector3 position = Vector3.zero;
-            if (origin == null)
+
+            if (destination == null)
             {
-                position = line.GetPosition(1);
                 distanceRatio = 1;
             }
-            else
+
+            if(origin== null)
             {
-                position = origin.position;
+                Destroy(gameObject);
+                return;
             }
 
-            line.SetPosition(0, position);
+            line.SetPosition(0, originPoint);
 
-            var headingAndDistance = (destination.position - position);
+            var headingAndDistance = (destPoint - originPoint);
             var direction = headingAndDistance.normalized 
                 * Mathf.Clamp(headingAndDistance.magnitude,
                 0,
                 maxRange)
                 * distanceRatio;
-            line.SetPosition(1, position + direction);
+            line.SetPosition(1, originPoint + direction);
             UpdateOpacity();
             if (beamDistanceTimer.Completed())
             {
@@ -71,6 +75,12 @@ public class BeamTrail : MonoBehaviour
                     //Debug.Log("Beam fire struck hull!");
                     weaponContactCallback.Invoke(); // determine accuracy if needed.
                 }
+            }
+
+            if (destination != null && origin != null)
+            {
+                originPoint = origin.position;
+                destPoint = destination.position;
             }
         }
     }
