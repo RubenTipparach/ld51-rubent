@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
 
     public Timing weaponTimer;
 
+    public AudioClip ArmorImpact;
+
     private void Awake()
     {
         gameManager = this;

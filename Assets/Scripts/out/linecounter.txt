@@ -1,0 +1,82 @@
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2022-10-03 10:49:38
+count workspace : y:\repos\ld51-rubent\Assets\Scripts
+total files : 64
+total code lines : 2368
+total comment lines : 146
+total blank lines : 537
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |          .meta|            372|              0|              0|     16|
+   |            .cs|           1996|            146|            537|     84|
+   -------------------------------------------------------------------------
+Camera.meta, code is 8, comment is 0, blank is 0.
+Camera\CubeController.cs, code is 60, comment is 2, blank is 17.
+Camera\CubeController.cs.meta, code is 11, comment is 0, blank is 0.
+Camera\FollowCamera.cs, code is 17, comment is 2, blank is 4.
+Camera\FollowCamera.cs.meta, code is 11, comment is 0, blank is 0.
+Camera\GameInput.cs, code is 43, comment is 6, blank is 8.
+Camera\GameInput.cs.meta, code is 11, comment is 0, blank is 0.
+Camera\OrbitShipCamera.cs, code is 173, comment is 26, blank is 56.
+Camera\OrbitShipCamera.cs.meta, code is 11, comment is 0, blank is 0.
+CircleLine.cs, code is 34, comment is 4, blank is 14.
+CircleLine.cs.meta, code is 11, comment is 0, blank is 0.
+FX.meta, code is 8, comment is 0, blank is 0.
+FX\Explosion.cs, code is 32, comment is 2, blank is 9.
+FX\Explosion.cs.meta, code is 11, comment is 0, blank is 0.
+GameManager.cs, code is 197, comment is 19, blank is 56.
+GameManager.cs.meta, code is 11, comment is 0, blank is 0.
+Gameplay.meta, code is 8, comment is 0, blank is 0.
+Gameplay\NavigationController.cs, code is 153, comment is 12, blank is 47.
+Gameplay\NavigationController.cs.meta, code is 11, comment is 0, blank is 0.
+Gameplay\Ship.cs, code is 246, comment is 18, blank is 70.
+Gameplay\Ship.cs.meta, code is 11, comment is 0, blank is 0.
+Gameplay\WeaponsCommandController.cs, code is 12, comment is 2, blank is 6.
+Gameplay\WeaponsCommandController.cs.meta, code is 11, comment is 0, blank is 0.
+Overlay.meta, code is 8, comment is 0, blank is 0.
+Overlay\ElevationWidget.cs, code is 24, comment is 2, blank is 9.
+Overlay\ElevationWidget.cs.meta, code is 11, comment is 0, blank is 0.
+Overlay\ManueverViz.cs, code is 15, comment is 1, blank is 5.
+Overlay\ManueverViz.cs.meta, code is 11, comment is 0, blank is 0.
+Overlay\ShipHolo.cs, code is 30, comment is 2, blank is 10.
+Overlay\ShipHolo.cs.meta, code is 11, comment is 0, blank is 0.
+UI.meta, code is 8, comment is 0, blank is 0.
+UI\FiringMarkerButton.cs, code is 41, comment is 0, blank is 8.
+UI\FiringMarkerButton.cs.meta, code is 11, comment is 0, blank is 0.
+UI\ManueverTimeline.cs, code is 102, comment is 4, blank is 15.
+UI\ManueverTimeline.cs.meta, code is 11, comment is 0, blank is 0.
+UI\ShipHealthSlider.cs, code is 22, comment is 0, blank is 5.
+UI\ShipHealthSlider.cs.meta, code is 11, comment is 0, blank is 0.
+UI\TimeMarker.cs, code is 10, comment is 0, blank is 1.
+UI\TimeMarker.cs.meta, code is 11, comment is 0, blank is 0.
+UI\TimesliceSelection.cs, code is 20, comment is 2, blank is 5.
+UI\TimesliceSelection.cs.meta, code is 11, comment is 0, blank is 0.
+UI\UIController.cs, code is 128, comment is 12, blank is 31.
+UI\UIController.cs.meta, code is 11, comment is 0, blank is 0.
+Utilities.meta, code is 8, comment is 0, blank is 0.
+Utilities\ArcTest.cs, code is 39, comment is 2, blank is 18.
+Utilities\ArcTest.cs.meta, code is 11, comment is 0, blank is 0.
+Utilities\HealthStats.cs, code is 69, comment is 1, blank is 14.
+Utilities\HealthStats.cs.meta, code is 11, comment is 0, blank is 0.
+Utilities\NoiseGenerator.cs, code is 184, comment is 13, blank is 37.
+Utilities\NoiseGenerator.cs.meta, code is 11, comment is 0, blank is 0.
+Utilities\RoundOffStuff.cs, code is 22, comment is 2, blank is 4.
+Utilities\RoundOffStuff.cs.meta, code is 11, comment is 0, blank is 0.
+Utilities\Timers.cs, code is 99, comment is 0, blank is 29.
+Utilities\Timers.cs.meta, code is 11, comment is 0, blank is 0.
+Utilities\VectorStuff.cs, code is 53, comment is 4, blank is 14.
+Utilities\VectorStuff.cs.meta, code is 11, comment is 0, blank is 0.
+Weapons.meta, code is 8, comment is 0, blank is 0.
+Weapons\FX.meta, code is 8, comment is 0, blank is 0.
+Weapons\FX\BeamTrail.cs, code is 121, comment is 5, blank is 31.
+Weapons\FX\BeamTrail.cs.meta, code is 11, comment is 0, blank is 0.
+Weapons\Laser.cs, code is 40, comment is 3, blank is 10.
+Weapons\Laser.cs.meta, code is 11, comment is 0, blank is 0.
+Weapons\Weapon.cs, code is 10, comment is 0, blank is 4.
+Weapons\Weapon.cs.meta, code is 11, comment is 0, blank is 0.
+===============================================================================

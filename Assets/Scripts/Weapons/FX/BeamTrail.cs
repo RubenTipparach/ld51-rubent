@@ -104,7 +104,7 @@ public class BeamTrail : MonoBehaviour
 
     public void FireBegin(Action callback,
         Transform origin,
-        Transform destination, float range, float angle = 30)
+        Transform destination, float range, bool hitAsteroid = false, float angle = 30)
     {
         weaponContactCallback = callback;
         this.origin = origin;
@@ -127,7 +127,8 @@ public class BeamTrail : MonoBehaviour
 
         var beamRotation = Quaternion.LookRotation((destPoint - originPoint).normalized);
 
-        if(Quaternion.Angle(beamRotation, origin.rotation) > angleOfFire)
+        // todo make it land on the asteroid...
+        if (Quaternion.Angle(beamRotation, origin.rotation) > angleOfFire || hitAsteroid) 
         {
             noHit = true;
         }

@@ -96,7 +96,9 @@ public class UIController : MonoBehaviour
     {
         GameManager.Instance.navController.shipSelected = GameManager.Instance.selectedShip;
         GameManager.Instance.navController.ActivateController(active);
-        if(active)
+        endTurnBtn.SetActive(false);
+
+        if (active)
         {
             HideEverything();
             confirmNavBtn.SetActive(active);
@@ -127,6 +129,8 @@ public class UIController : MonoBehaviour
     {
         GameManager.Instance.navController.Confirm();
         BringBackMainMenu();
+        endTurnBtn.SetActive(true);
+
     }
 
     public void StartTurn()

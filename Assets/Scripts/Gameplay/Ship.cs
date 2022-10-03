@@ -43,41 +43,68 @@ public class Ship : MonoBehaviour
     public Explosion explosionImpact;
     public Explosion shipDestroyed;
     public float impactExpDelay = .3f;
-    public void DealDamage(float hullDamage, float reactorDamage, Vector3? hullImpactPoint = null)
+    public void DealDamage(float hullDamage,
+        float reactorDamage,
+        Vector3? hullImpactPoint = null,
+        bool hitArmor = false)
     {
-        shipHealth.TakeDamage(hullDamage);
 
-        if(hullImpactPoint != null)
+        if (hitArmor)
         {
-            // blow up in that spot
+            if (hullImpactPoint != null)
+            {
+                // blow up in that spot
+                StartCoroutine(DelayArmorImpact(hullImpactPoint.Value));
+            }
+            else
+            {
+                StartCoroutine(DelayArmorImpact(transform.position));
+            }
         }
         else
         {
-            StartCoroutine(DelayExplosion());
-        }
+            shipHealth.TakeDamage(hullDamage);
 
-        //reactorHealth.TakeDamage(reactorDamage);
+            if (hullImpactPoint != null)
+            {
+                // blow up in that spot
+                StartCoroutine(DelayExplosion(hullImpactPoint.Value));
+            }
+            else
+            {
+                StartCoroutine(DelayExplosion(transform.position));
+            }
 
-        //healthSprite.
-        shipHealthSlider.healthSlider.value = shipHealth.Percent;
+            //reactorHealth.TakeDamage(reactorDamage);
 
-        if(reactorHealth.IsDead)
-        {
-            //ship is disabled.
-        }
+            //healthSprite.
+            shipHealthSlider.healthSlider.value = shipHealth.Percent;
 
-        if(shipHealth.IsDead)
-        {
-            // ship explodes.
-            Instantiate(shipDestroyed, transform.position, Quaternion.identity);
-            Destroy(shipHealthSlider.gameObject);
-            StartCoroutine(DestroyShipCoroutine());
+            if (reactorHealth.IsDead)
+            {
+                //ship is disabled.
+            }
+
+            if (shipHealth.IsDead)
+            {
+                // ship explodes.
+                Instantiate(shipDestroyed, transform.position, Quaternion.identity);
+                Destroy(shipHealthSlider.gameObject);
+                StartCoroutine(DestroyShipCoroutine());
+            }
         }
     }
-    IEnumerator DelayExplosion()
+
+    IEnumerator DelayArmorImpact(Vector3 expPosition)
     {
         yield return new WaitForSeconds(impactExpDelay);
-        Instantiate(explosionImpact, transform.position, Quaternion.identity);
+        AudioSource.PlayClipAtPoint(GameManager.Instance.ArmorImpact, expPosition);
+    }
+
+    IEnumerator DelayExplosion(Vector3 expPosition)
+    {
+        yield return new WaitForSeconds(impactExpDelay);
+        Instantiate(explosionImpact, expPosition, Quaternion.identity);
     }
 
     IEnumerator DestroyShipCoroutine()
@@ -306,9 +333,6 @@ public class FiringSolutiion
             fireCommand[i].Clear();
         }
     }
-
-
-
 }
 
 [Serializable]

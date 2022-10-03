@@ -493,7 +493,6 @@ MonoBehaviour:
   missile: {fileID: 0}
   torpedo: {fileID: 0}
   cancleWeps: {fileID: 0}
-  shipHealthSliders: []
   templateHealthSlider: {fileID: 453148277870041998, guid: 73342125a80f93248b61e5b1ab1acd95,
     type: 3}
   sliderYOffset: 60
@@ -5844,7 +5843,7 @@ MonoBehaviour:
   selectedShip: {fileID: 0}
   shipMask:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 448
   interactive:
     serializedVersion: 2
     m_Bits: 0
@@ -5860,6 +5859,7 @@ MonoBehaviour:
   weaponTimer:
     duration: 1
     time: 0
+  ArmorImpact: {fileID: 8300000, guid: b318a7cf6d46abd448ab315f705136d3, type: 3}
 --- !u!1 &1243486437
 GameObject:
   m_ObjectHideFlags: 0

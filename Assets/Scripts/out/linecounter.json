@@ -1,0 +1,413 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "y:\\repos\\ld51-rubent\\Assets\\Scripts",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2022-10-03 10:49:38",
+            "filesum": 64,
+            "codesum": 2368,
+            "commentsum": 146,
+            "blanksum": 537,
+            "statistics": {
+                ".meta": {
+                    "code": 372,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".cs": {
+                    "code": 1996,
+                    "comment": 146,
+                    "blank": 537
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "Camera.meta"
+                },
+                {
+                    "blank": 17,
+                    "code": 60,
+                    "comment": 2,
+                    "filename": "Camera\\CubeController.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Camera\\CubeController.cs.meta"
+                },
+                {
+                    "blank": 4,
+                    "code": 17,
+                    "comment": 2,
+                    "filename": "Camera\\FollowCamera.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Camera\\FollowCamera.cs.meta"
+                },
+                {
+                    "blank": 8,
+                    "code": 43,
+                    "comment": 6,
+                    "filename": "Camera\\GameInput.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Camera\\GameInput.cs.meta"
+                },
+                {
+                    "blank": 56,
+                    "code": 173,
+                    "comment": 26,
+                    "filename": "Camera\\OrbitShipCamera.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Camera\\OrbitShipCamera.cs.meta"
+                },
+                {
+                    "blank": 14,
+                    "code": 34,
+                    "comment": 4,
+                    "filename": "CircleLine.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "CircleLine.cs.meta"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "FX.meta"
+                },
+                {
+                    "blank": 9,
+                    "code": 32,
+                    "comment": 2,
+                    "filename": "FX\\Explosion.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "FX\\Explosion.cs.meta"
+                },
+                {
+                    "blank": 56,
+                    "code": 197,
+                    "comment": 19,
+                    "filename": "GameManager.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "GameManager.cs.meta"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "Gameplay.meta"
+                },
+                {
+                    "blank": 47,
+                    "code": 153,
+                    "comment": 12,
+                    "filename": "Gameplay\\NavigationController.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Gameplay\\NavigationController.cs.meta"
+                },
+                {
+                    "blank": 70,
+                    "code": 246,
+                    "comment": 18,
+                    "filename": "Gameplay\\Ship.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Gameplay\\Ship.cs.meta"
+                },
+                {
+                    "blank": 6,
+                    "code": 12,
+                    "comment": 2,
+                    "filename": "Gameplay\\WeaponsCommandController.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Gameplay\\WeaponsCommandController.cs.meta"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "Overlay.meta"
+                },
+                {
+                    "blank": 9,
+                    "code": 24,
+                    "comment": 2,
+                    "filename": "Overlay\\ElevationWidget.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Overlay\\ElevationWidget.cs.meta"
+                },
+                {
+                    "blank": 5,
+                    "code": 15,
+                    "comment": 1,
+                    "filename": "Overlay\\ManueverViz.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Overlay\\ManueverViz.cs.meta"
+                },
+                {
+                    "blank": 10,
+                    "code": 30,
+                    "comment": 2,
+                    "filename": "Overlay\\ShipHolo.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Overlay\\ShipHolo.cs.meta"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "UI.meta"
+                },
+                {
+                    "blank": 8,
+                    "code": 41,
+                    "comment": 0,
+                    "filename": "UI\\FiringMarkerButton.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "UI\\FiringMarkerButton.cs.meta"
+                },
+                {
+                    "blank": 15,
+                    "code": 102,
+                    "comment": 4,
+                    "filename": "UI\\ManueverTimeline.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "UI\\ManueverTimeline.cs.meta"
+                },
+                {
+                    "blank": 5,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "UI\\ShipHealthSlider.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "UI\\ShipHealthSlider.cs.meta"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "UI\\TimeMarker.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "UI\\TimeMarker.cs.meta"
+                },
+                {
+                    "blank": 5,
+                    "code": 20,
+                    "comment": 2,
+                    "filename": "UI\\TimesliceSelection.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "UI\\TimesliceSelection.cs.meta"
+                },
+                {
+                    "blank": 31,
+                    "code": 128,
+                    "comment": 12,
+                    "filename": "UI\\UIController.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "UI\\UIController.cs.meta"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "Utilities.meta"
+                },
+                {
+                    "blank": 18,
+                    "code": 39,
+                    "comment": 2,
+                    "filename": "Utilities\\ArcTest.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Utilities\\ArcTest.cs.meta"
+                },
+                {
+                    "blank": 14,
+                    "code": 69,
+                    "comment": 1,
+                    "filename": "Utilities\\HealthStats.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Utilities\\HealthStats.cs.meta"
+                },
+                {
+                    "blank": 37,
+                    "code": 184,
+                    "comment": 13,
+                    "filename": "Utilities\\NoiseGenerator.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Utilities\\NoiseGenerator.cs.meta"
+                },
+                {
+                    "blank": 4,
+                    "code": 22,
+                    "comment": 2,
+                    "filename": "Utilities\\RoundOffStuff.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Utilities\\RoundOffStuff.cs.meta"
+                },
+                {
+                    "blank": 29,
+                    "code": 99,
+                    "comment": 0,
+                    "filename": "Utilities\\Timers.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Utilities\\Timers.cs.meta"
+                },
+                {
+                    "blank": 14,
+                    "code": 53,
+                    "comment": 4,
+                    "filename": "Utilities\\VectorStuff.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Utilities\\VectorStuff.cs.meta"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "Weapons.meta"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "Weapons\\FX.meta"
+                },
+                {
+                    "blank": 31,
+                    "code": 121,
+                    "comment": 5,
+                    "filename": "Weapons\\FX\\BeamTrail.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Weapons\\FX\\BeamTrail.cs.meta"
+                },
+                {
+                    "blank": 10,
+                    "code": 40,
+                    "comment": 3,
+                    "filename": "Weapons\\Laser.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Weapons\\Laser.cs.meta"
+                },
+                {
+                    "blank": 4,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "Weapons\\Weapon.cs"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "Weapons\\Weapon.cs.meta"
+                }
+            ]
+        }
+    ]
+}
