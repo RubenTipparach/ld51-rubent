@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -30,6 +31,8 @@ public class NavigationController : MonoBehaviour
 
     public Ship rotateToTarget;
 
+    public LineRenderer attackLine;
+
     public void SetElevationOffset(float value)
     {
         offsetElevation = value;
@@ -45,7 +48,19 @@ public class NavigationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(attackLine.enabled)
+        {
+            if(shipSelected.firingSolutiion.targetFiring != null)
+            {
 
+            var targetPosition = shipSelected.firingSolutiion.targetFiring;
+            attackLine.SetPosition(0, shipPositionDestination.transform.position);
+            attackLine.SetPosition(1, targetPosition.transform.position);
+            }
+            else {
+                shipSelected.firingSolutiion.targetFiring = null;
+            }
+        }
     }
 
     public void UpdateOrientationPosition(Quaternion destination)
@@ -99,6 +114,7 @@ public class NavigationController : MonoBehaviour
         elevationLine.enabled = active;
 
         shipPositionDestination.enabled = active;
+        attackLine.enabled = false;
 
         shipPositionHighlight.enabled = false;
         shipPositionPreview.enabled = false; // only shows when you hover ui.
@@ -114,6 +130,11 @@ public class NavigationController : MonoBehaviour
             {
                 shipSelected.maneuverSelected.Initialize(shipSelected);
                 UpdateDestinationPosition(shipSelected.maneuverSelected.destinationLocalOffset + shipSelected.transform.position);
+            }
+
+            if(shipSelected.firingSolutiion.targetFiring != null)
+            {
+                attackLine.enabled = true;
             }
 
             SetShipModel(shipSelected.shipGhost.sharedMesh);
@@ -173,5 +194,18 @@ public class NavigationController : MonoBehaviour
     public void CancelManuever()
     {
         ActivateController(false);
+    }
+
+    public void TargetShip(Ship target)
+    {
+        var orientation = Quaternion.LookRotation((target.transform.position -
+                    shipPositionDestination.transform.position).normalized);
+        rotateToTarget = target;
+        UpdateOrientationPosition(orientation);
+
+        if (shipSelected.firingSolutiion.targetFiring != null)
+        {
+            attackLine.enabled = true;
+        }
     }
 }

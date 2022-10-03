@@ -30,8 +30,10 @@ public class Laser : Weapon
         if (!firedThisRound)
         {
             var beam = Instantiate(beamTrailSpawn);
-            DamagePlayer(target);
-            beam.FireBegin(() => { Debug.Log("damage callback"); }, transform, target.transform, range);
+            beam.FireBegin(() => { 
+                Debug.Log("damage callback"); 
+                DamagePlayer(target); 
+            }, transform, target.transform, range);
         }
     }
 

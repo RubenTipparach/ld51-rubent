@@ -24,8 +24,6 @@ public class UIController : MonoBehaviour
     public GameObject torpedo;
     public GameObject cancleWeps;
 
-    public List<ShipHealthSlider> shipHealthSliders;
-
     public ShipHealthSlider templateHealthSlider;
 
     public float sliderYOffset = 20f;
@@ -49,7 +47,7 @@ public class UIController : MonoBehaviour
         foreach(var ship in GameManager.Instance.allShips)
         {
             var isVisible = IsVisible(Camera.main, ship.gameObject);
-            if (isVisible)
+            if (isVisible && ship.shipHealthSlider != null)
             {
                 ship.shipHealthSlider.gameObject.SetActive(true);
 
@@ -118,7 +116,6 @@ public class UIController : MonoBehaviour
 
         moveBtn.SetActive(true);
         fireWeapon.gameObject.SetActive(true);
-        endTurnBtn.SetActive(true);
     }
 
     public void ActivateWeapons(bool active)
@@ -132,10 +129,16 @@ public class UIController : MonoBehaviour
         BringBackMainMenu();
     }
 
+    public void StartTurn()
+    {
+        endTurnBtn.SetActive(true);
+    }
+
     public void EndTurn()
     {
         GameManager.Instance.EndTurn();
         planningBar.SetActive(false);
+        endTurnBtn.SetActive(false);
     }
 
     public void HideEverything()
@@ -145,7 +148,6 @@ public class UIController : MonoBehaviour
 
         moveBtn.SetActive(false);
         fireWeapon.gameObject.SetActive(false);
-        endTurnBtn.SetActive(false);
 
         confirmNavBtn.SetActive(false);
 

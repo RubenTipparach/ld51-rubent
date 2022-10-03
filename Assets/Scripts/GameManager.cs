@@ -80,7 +80,8 @@ public class GameManager : MonoBehaviour
         manueverTimeline.SetHighlight(0);
         manueverTimeline.RunTimeline(false);
         //manueverTimeline.ClearWepMarkers(); // maybe keep this?
-        manueverTimeline.timesliceSelection.slider.value = 0;        
+        manueverTimeline.timesliceSelection.slider.value = 0;
+        uiController.StartTurn();
     }
 
     // Update is called once per frame
@@ -173,13 +174,10 @@ public class GameManager : MonoBehaviour
                     var target = hit.rigidbody.GetComponent<Ship>();
                     if (selectedShip.isPlayer && simulationRunning == false && target != selectedShip)
                     {
-                        var orientation = Quaternion.LookRotation((hit.transform.position -
-                            navController.shipPositionDestination.transform.position).normalized);
-                        navController.rotateToTarget = target;
-                        navController.UpdateOrientationPosition(orientation);
-
+        
                         selectedShip.firingSolutiion.targetFiring = target;
 
+                        navController.TargetShip(target);
                         selectedShipClick = true;
                     }
                 }

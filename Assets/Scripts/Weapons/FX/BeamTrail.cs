@@ -27,6 +27,8 @@ public class BeamTrail : MonoBehaviour
     Vector3 originPoint = Vector3.zero;
     Vector3 destPoint = Vector3.zero;
 
+    public float angleOfFire = 30f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +55,11 @@ public class BeamTrail : MonoBehaviour
                 return;
             }
 
+            if(noHit)
+            {
+                destPoint = origin.forward * maxRange + origin.position;
+            }
+
             line.SetPosition(0, originPoint);
 
             var headingAndDistance = (destPoint - originPoint);
@@ -61,6 +68,7 @@ public class BeamTrail : MonoBehaviour
                 0,
                 maxRange)
                 * distanceRatio;
+
             line.SetPosition(1, originPoint + direction);
             UpdateOpacity();
             if (beamDistanceTimer.Completed())
@@ -72,7 +80,7 @@ public class BeamTrail : MonoBehaviour
                 if (!noHit && !hitDetection && distanceRatio >= 1f)
                 {
                     hitDetection = true;
-                    //Debug.Log("Beam fire struck hull!");
+                    Debug.Log("Beam fire struck hull!");
                     weaponContactCallback.Invoke(); // determine accuracy if needed.
                 }
             }
@@ -96,7 +104,7 @@ public class BeamTrail : MonoBehaviour
 
     public void FireBegin(Action callback,
         Transform origin,
-        Transform destination, float range)
+        Transform destination, float range, float angle = 30)
     {
         weaponContactCallback = callback;
         this.origin = origin;
@@ -108,12 +116,13 @@ public class BeamTrail : MonoBehaviour
         {
             noHit = true;
             beamDistance = range;
+            //weaponContactCallback = null;
         }
 
         beamDistanceTimer.duration = beamDistance / beamAttributes.beamTravelSpeed + afterGlowTime;
 
         beamDistanceTimer.Init();
-        Debug.Log("time for beam" + beamDistanceTimer.duration);
+        //Debug.Log("time for beam " + beamDistanceTimer.duration + " beam dist " + beamDistance);
 
         transform.position = origin.position;
         line.SetPosition(0, transform.position);
@@ -121,6 +130,7 @@ public class BeamTrail : MonoBehaviour
 
         initialized = true;
         maxRange = range;
+        angleOfFire = angle;
     }
 }
 

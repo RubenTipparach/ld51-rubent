@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.UI.Image;
@@ -41,7 +42,7 @@ public class Ship : MonoBehaviour
 
     public Explosion explosionImpact;
     public Explosion shipDestroyed;
-
+    public float impactExpDelay = .3f;
     public void DealDamage(float hullDamage, float reactorDamage, Vector3? hullImpactPoint = null)
     {
         shipHealth.TakeDamage(hullDamage);
@@ -52,7 +53,7 @@ public class Ship : MonoBehaviour
         }
         else
         {
-            Instantiate(explosionImpact, transform.position, Quaternion.identity);
+            StartCoroutine(DelayExplosion());
         }
 
         //reactorHealth.TakeDamage(reactorDamage);
@@ -69,11 +70,23 @@ public class Ship : MonoBehaviour
         {
             // ship explodes.
             Instantiate(shipDestroyed, transform.position, Quaternion.identity);
-            GameManager.Instance.allShips.Remove(this); //fuck it, lets blow it up!
             Destroy(shipHealthSlider.gameObject);
-            Destroy(gameObject);
-
+            StartCoroutine(DestroyShipCoroutine());
         }
+    }
+    IEnumerator DelayExplosion()
+    {
+        yield return new WaitForSeconds(impactExpDelay);
+        Instantiate(explosionImpact, transform.position, Quaternion.identity);
+    }
+
+    IEnumerator DestroyShipCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+        GameManager.Instance.allShips.Remove(this); //fuck it, lets blow it up!
+
+        yield return new WaitForSeconds(.5f);
+        Destroy(gameObject);
     }
 
     // Use this for initialization
@@ -185,6 +198,38 @@ public class Ship : MonoBehaviour
     {
         firingSolutiion.FireWeapons(timeSecond);
     }
+
+
+    public float waitToCheckCollision = .2f;
+    public float defaultCollisionDamage = 20f;
+    bool collisionCheck = false;
+
+    public LayerMask layerMask;
+
+    //easy to just hack the physics masking table for now
+    void OnCollisionStay(Collision other)
+    {
+        if (!collisionCheck 
+            && 
+            (layerMask == (layerMask | 1 << other.transform.gameObject.layer)))
+        {
+            StartCoroutine(CollisionDamage());
+        }
+    }
+
+    IEnumerator CollisionDamage()
+    {
+        collisionCheck = true;
+
+        if (this != null && !shipHealth.IsDead)
+        {
+            DealDamage(defaultCollisionDamage, 0);
+        }
+
+        yield return new WaitForSeconds(waitToCheckCollision);
+
+        collisionCheck = false;
+    }
 }
 
 
@@ -261,6 +306,9 @@ public class FiringSolutiion
             fireCommand[i].Clear();
         }
     }
+
+
+
 }
 
 [Serializable]
