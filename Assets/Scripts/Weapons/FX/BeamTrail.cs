@@ -119,6 +119,19 @@ public class BeamTrail : MonoBehaviour
             //weaponContactCallback = null;
         }
 
+        if (destination != null && origin != null)
+        {
+            originPoint = origin.position;
+            destPoint = destination.position;
+        }
+
+        var beamRotation = Quaternion.LookRotation((destPoint - originPoint).normalized);
+
+        if(Quaternion.Angle(beamRotation, origin.rotation) > angleOfFire)
+        {
+            noHit = true;
+        }
+
         beamDistanceTimer.duration = beamDistance / beamAttributes.beamTravelSpeed + afterGlowTime;
 
         beamDistanceTimer.Init();
