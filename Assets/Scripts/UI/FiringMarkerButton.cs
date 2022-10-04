@@ -33,17 +33,26 @@ public class FiringMarkerButton : MonoBehaviour
     {
         var highlightedIndex = GameManager.Instance.highlightedTimeSecond;
 
+
         if (isInFiringState)
         {
-            GameManager.Instance.manueverTimeline
-                .AddOrRemoveFiringMarker(highlightedIndex, false);
+            //add marker -- can I Add?
+            // check weapon index 0
+            if (GameManager.Instance.selectedShip.CanFireShots(0))
+            {
+                GameManager.Instance.manueverTimeline
+                    .AddOrRemoveFiringMarker(highlightedIndex, false);
+                SetFiringState(isInFiringState);
+            }
+
         }
         else
         {
+            // remove marker
             GameManager.Instance.manueverTimeline
                 .AddOrRemoveFiringMarker(highlightedIndex, true);
+            SetFiringState(isInFiringState);
         }
 
-        SetFiringState(isInFiringState);
     }
 }

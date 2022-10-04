@@ -12,7 +12,6 @@ public class Laser : Weapon
     public float armorPiercing = .25f;
     public float reactorDamageRatio = .5f;
 
-
     public float range = 50f;
 
     public override bool CanFireThisRound()
@@ -29,6 +28,8 @@ public class Laser : Weapon
     {
         if (!firedThisRound)
         {
+      
+
             var beam = Instantiate(beamTrailSpawn);
             // first do raycast to see if we hit a piece of armor.
             var layerMask = GameManager.Instance.shipMask;
@@ -61,6 +62,8 @@ public class Laser : Weapon
                 //Debug.Log("damage callback"); 
                 DamagePlayer(target, hitArmor); 
             }, transform, target.transform, range, hitAsteroid);
+
+            
         }
     }
 

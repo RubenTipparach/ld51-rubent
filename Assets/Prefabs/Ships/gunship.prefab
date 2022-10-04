@@ -629,13 +629,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98dcafcc4b4950c46a6b26f8c8a8d5c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponShots: 3
   firedThisRound: 0
   beamTrailSpawn: {fileID: 7529727945789267533, guid: 59db4987513de0a45b55a14b6770d5c5,
     type: 3}
   damage: 10
   armorPiercing: 0.25
   reactorDamageRatio: 0.5
-  range: 50
+  range: 60
 --- !u!1 &4808872841536904821
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,6 +813,7 @@ MonoBehaviour:
   shipDestroyed: {fileID: 7096603956656296648, guid: d124b75bba7db7b49a2d819b17ef98ca,
     type: 3}
   impactExpDelay: 0.3
+  weaponShots: 0
   waitToCheckCollision: 0.2
   defaultCollisionDamage: 20
   layerMask:

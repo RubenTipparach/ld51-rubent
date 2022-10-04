@@ -27,6 +27,8 @@ public class UIController : MonoBehaviour
     public ShipHealthSlider templateHealthSlider;
 
     public float sliderYOffset = 20f;
+
+    public GameObject tutorial;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,11 @@ public class UIController : MonoBehaviour
             ship.shipHealthSlider = hSlider;
             ship.shipHealthSlider.Initialize(ship.isPlayer);
         }
+
+        tutorial.transform.SetAsLastSibling();
+        tutorial.SetActive(true);
+        GameManager.Instance.winScreen.transform.SetAsLastSibling();
+        GameManager.Instance.looseScreen.transform.SetAsLastSibling();
     }
 
     // Update is called once per frame

@@ -283,6 +283,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 5
     m_NumAlphaKeys: 3
+  angleOfFire: 60
 --- !u!82 &-5358762783656377762
 AudioSource:
   m_ObjectHideFlags: 0

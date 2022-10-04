@@ -17,11 +17,11 @@ public class ShipHealthSlider : MonoBehaviour
     {
         if(isEnemy)
         {
-            barColor.color = enemyHealthBarColor;
+            barColor.color = friendlyHealthBarColor;
         }
         else
         {
-            barColor.color = friendlyHealthBarColor;
+            barColor.color = enemyHealthBarColor;
         }
     }
 }

@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
 
     public AudioClip ArmorImpact;
 
+    public GameObject winScreen;
+    public GameObject looseScreen;
+
     private void Awake()
     {
         gameManager = this;
@@ -63,6 +66,8 @@ public class GameManager : MonoBehaviour
 
     private void StartOfTurn()
     {
+        CheckIfWinLoose();
+
         if (selectedShip != null)
         {
             uiController.SelectShip(selectedShip.isPlayer);
@@ -242,6 +247,36 @@ public class GameManager : MonoBehaviour
         manueverTimeline.RunTimeline(true);
     }
 
+    private void CheckIfWinLoose()
+    {
+        var playerCount = allShips.Where(p => p.isPlayer).ToArray().Length;
+
+        var enemyCount = allShips.Where(p => !p.isPlayer).ToArray().Length;
+
+        //Debug.Log("enemy count " + enemyCount);
+        //Debug.Log("player count " + playerCount);
+
+        if (playerCount == 0)
+        {
+            LooseGame();
+        }
+
+        if(enemyCount == 0)
+        {
+            WinGame();
+        }
+
+    }
+
+    public void WinGame()
+    {
+        winScreen.SetActive(true);
+    }
+
+    public void LooseGame()
+    {
+        looseScreen.SetActive(true);
+    }
 
     public void UpdateEnemyLogic()
     {

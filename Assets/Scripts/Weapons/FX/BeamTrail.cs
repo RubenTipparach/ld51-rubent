@@ -80,7 +80,7 @@ public class BeamTrail : MonoBehaviour
                 if (!noHit && !hitDetection && distanceRatio >= 1f)
                 {
                     hitDetection = true;
-                    Debug.Log("Beam fire struck hull!");
+                    //Debug.Log("Beam fire struck hull!");
                     weaponContactCallback.Invoke(); // determine accuracy if needed.
                 }
             }
@@ -104,7 +104,7 @@ public class BeamTrail : MonoBehaviour
 
     public void FireBegin(Action callback,
         Transform origin,
-        Transform destination, float range, bool hitAsteroid = false, float angle = 30)
+        Transform destination, float range, bool hitAsteroid = false, float angle = -1)
     {
         weaponContactCallback = callback;
         this.origin = origin;
@@ -144,7 +144,10 @@ public class BeamTrail : MonoBehaviour
 
         initialized = true;
         maxRange = range;
-        angleOfFire = angle;
+        if (angle != -1)
+        {
+            angleOfFire = angle;
+        }
     }
 }
 

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.UI.Image;
 
@@ -43,6 +44,11 @@ public class Ship : MonoBehaviour
     public Explosion explosionImpact;
     public Explosion shipDestroyed;
     public float impactExpDelay = .3f;
+
+    public UnityAction onEndTurnEvent;
+
+    public int weaponShots = 0;
+
     public void DealDamage(float hullDamage,
         float reactorDamage,
         Vector3? hullImpactPoint = null,
@@ -157,6 +163,15 @@ public class Ship : MonoBehaviour
         if (isPlayer)
         {
             ShowMovementPlan();
+
+            foreach (var wepCmd in firingSolutiion.fireCommand)
+            {
+                if (wepCmd.Value.Count > 0)
+                {
+                    weaponShots++;
+                }
+            }
+            //AIs reset their fire pattern automatically.
         }
 
         //clear flags.
@@ -178,6 +193,13 @@ public class Ship : MonoBehaviour
         ShowMovementPlan();
     }
 
+    public void ConfirmMoveSimple()
+    {
+        origin = transform.position;
+        startRotation = transform.rotation;
+        destination = transform.position + maneuverSelected.destinationLocalOffset;
+    }
+
 
     public void ShowMovementPlan()
     {
@@ -187,6 +209,7 @@ public class Ship : MonoBehaviour
     }
     public void EndTurn()
     {
+        onEndTurnEvent?.Invoke();
 
         if (!maneuverSelected.initialDestSet)
         {
@@ -199,12 +222,18 @@ public class Ship : MonoBehaviour
 
         //auto fire anything queued at the 0th second.
         CheckAndFireWeapons(0);
+        weaponShots = 0;
     }
 
     public void UpdateShipPositionAndRotation(float percent)
     {
         transform.position = Vector3.Lerp(origin, destination, percent);
         transform.rotation = Quaternion.Lerp(startRotation, maneuverSelected.targetOrientation, percent);
+    }
+
+    public bool CanFireShots(int checkWeaponIndex)
+    {
+        return weaponShots < weapons[checkWeaponIndex].weaponShots;
     }
 
     public void QueueWeaponFire(int timeSecond,
@@ -214,10 +243,12 @@ public class Ship : MonoBehaviour
 
         firingSolutiion.QueueWeaponFire(timeSecond,
             weapons[wepIndex]);
+        weaponShots++;
     }
 
     public void ClearSecond(int timeSecond)
     {
+        weaponShots--;
         firingSolutiion.ClearSecond(timeSecond);
     }
 

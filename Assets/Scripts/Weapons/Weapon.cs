@@ -11,4 +11,7 @@ public abstract class Weapon : MonoBehaviour
     public abstract bool CanFireThisRound();
 
     public abstract void BeginFiringQueue();
+
+    public int weaponShots = 2;
+
 }
