@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject winScreen;
     public GameObject looseScreen;
+    bool selectedShipClick = false;
 
     private void Awake()
     {
@@ -168,10 +169,9 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        bool selectedShipClick = false;
 
         // quick rotate code to target enemy ships and rotate towards them.
-        if (Input.GetMouseButton(0) && navController.navModeActive)
+        if (Input.GetMouseButtonDown(0) && navController.navModeActive)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 10000))
@@ -189,6 +189,11 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
+        }
+
+        if(Input.GetMouseButtonUp(0) && navController.navModeActive && selectedShipClick)
+        {
+            selectedShipClick = false;
         }
 
         if (navController.navModeActive && !selectedShipClick)
@@ -215,7 +220,8 @@ public class GameManager : MonoBehaviour
 
             if (!uiRaycastBlock
                 && !navController.elevationWidget.interacting
-                && Input.GetMouseButton(0))
+                && Input.GetMouseButton(0)
+                && !selectedShipClick)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
